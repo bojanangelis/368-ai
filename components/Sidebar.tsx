@@ -63,7 +63,7 @@ const Sidebar = () => {
   const pathname = usePathname()
   console.log(pathname)
   return (
-    <div className='space-y-4 py-4 flex flex-col h-full bg-[#0C0C0D] text-white font-mono'>
+    <div className='space-y-4 py-4 flex flex-col h-full bg-[#0C0C0D] text-white'>
       <div className='px-3 py-2 flex-1'>
         <Link className='flex items-center pl-4' href='/dashboard'>
           <div className='relative w-16 h-16 mr-2 p-4'>

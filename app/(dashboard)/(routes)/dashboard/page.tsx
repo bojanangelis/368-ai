@@ -48,10 +48,8 @@ const DashboardPage = () => {
   return (
     <div>
       <div className='mb-8 space-y-4'>
-        <h2 className='text-2xl md:text-4xl font-bold text-center font-mono'>
-          Explore the power fo AI
-        </h2>
-        <p className='text-muted-foreground font-mono text-sm md:text-lg text-center'>
+        <h2 className='text-2xl md:text-4xl font-bold text-center'>Explore the power fo AI</h2>
+        <p className='text-muted-foreground text-sm md:text-lg text-center'>
           Chat with the smartest AI - Experience the limitless
         </p>
       </div>
@@ -66,7 +64,7 @@ const DashboardPage = () => {
               <div className={cn('p-2 w-fit rounded-md', tool.bgColor)}>
                 <tool.icon className={cn('w-8 h-8', tool.color)} />
               </div>
-              <div className='font-semibold font-mono'>
+              <div className='font-semibold'>
                 <h3 className='text-lg font-bold'>{tool.label}</h3>
               </div>
             </div>
