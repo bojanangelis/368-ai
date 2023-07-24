@@ -7,3 +7,7 @@ export interface HeaderInterfaceProps {
   iconColor?: string
   bgColor?: string
 }
+
+export interface EmptyInterfaceProps {
+  label: string
+}

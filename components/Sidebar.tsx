@@ -61,7 +61,6 @@ const routes = [
 
 const Sidebar = () => {
   const pathname = usePathname()
-  console.log(pathname)
   return (
     <div className='space-y-4 py-4 flex flex-col h-full bg-[#0C0C0D] text-white'>
       <div className='px-3 py-2 flex-1'>
