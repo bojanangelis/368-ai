@@ -38,7 +38,7 @@ const tools = [
     label: 'Code Generation',
     icon: Code,
     color: 'text-green-700',
-    bgColor: 'bg-green-700/10',
+    bgColor: 'bg-green-400/10',
     href: '/code',
   },
 ]
