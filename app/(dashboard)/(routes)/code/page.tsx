@@ -1,13 +1,12 @@
 'use client'
-
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
-import { Code, SendHorizonal } from 'lucide-react'
+import { Code, Copy, CopyCheck, SendHorizonal } from 'lucide-react'
 import { ChatCompletionRequestMessage } from 'openai'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
+import { set, useForm } from 'react-hook-form'
 import { formSchema } from './constants'
 import Header from '@/components/Header'
 import React, { useState } from 'react'
@@ -23,6 +22,7 @@ import ReactMarkdown from 'react-markdown'
 const CodePage = () => {
   const router = useRouter()
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([])
+  const [copy, setCopy] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -52,6 +52,13 @@ const CodePage = () => {
     } finally {
       router.refresh()
     }
+  }
+  const handleCopy = (props: any) => {
+    navigator.clipboard.writeText(props?.children[0]?.props?.children[0] ?? '')
+    setCopy(true)
+    setTimeout(() => {
+      setCopy(false)
+    }, 2000)
   }
 
   return (
@@ -100,42 +107,6 @@ const CodePage = () => {
             </div>
           )}
           {messages.length === 0 && !isLoading && <Empty label='No conversation started.' />}
-          {/* <div className='flex flex-col-reverse gap-y-4'>
-            {messages.map((message) => (
-              <div
-                key={message.content}
-                className={cn(
-                  'p-8 w-full flex items-start gap-x-8 rounded-lg',
-                  message.role === 'user' ? 'bg-white border border-black/10' : 'bg-[#0C0C0D]'
-                )}
-              >
-                {message.role === 'user' ? <UserAvatar /> : <BotAvatar />}
-                <p
-                  className={cn(
-                    'text-sm',
-                    message.role === 'user' ? 'text-black/90' : 'text-white'
-                  )}
-                >
-                  {message.content}
-                </p>
-                <ReactMarkdown
-                  components={{
-                    pre: ({ node, ...props }) => (
-                      <div className='overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg'>
-                        <pre {...props} />
-                      </div>
-                    ),
-                    code: ({ node, ...props }) => (
-                      <code className='bg-black/10 rounded-lg p-1' {...props} />
-                    ),
-                  }}
-                  className='text-sm overflow-hidden leading-7'
-                >
-                  {message.content || ''}
-                </ReactMarkdown>
-              </div>
-            ))}
-          </div> */}
           <div className='flex flex-col-reverse gap-y-4'>
             {messages.map((message) => (
               <div
@@ -154,15 +125,10 @@ const CodePage = () => {
                       <div className='overflow-auto relative w-full my-2 bg-white/90 text-black p-2 rounded-lg'>
                         <pre {...props} />
                         <button
-                          onClick={() =>
-                            navigator.clipboard.writeText(
-                              //@ts-ignore
-                              props?.children[0]?.props?.children[0] ?? ''
-                            )
-                          }
-                          className='absolute top-2 right-2'
+                          onClick={() => handleCopy(props as any)}
+                          className='absolute top-5 right-5'
                         >
-                          copy
+                          {copy ? <CopyCheck /> : <Copy />}
                         </button>
                       </div>
                     ),
