@@ -14,6 +14,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
+import FreeCounter from './FreeCounter'
 
 const routes = [
   {
@@ -58,8 +59,11 @@ const routes = [
     href: '/settings',
   },
 ]
+interface Props {
+  apiLimitCount: number
+}
 
-const Sidebar = () => {
+const Sidebar = ({ apiLimitCount = 0 }: Props) => {
   const pathname = usePathname()
   return (
     <div className='space-y-4 py-4 flex flex-col h-full bg-[#0C0C0D] text-white'>
@@ -92,6 +96,7 @@ const Sidebar = () => {
           ))}
         </div>
       </div>
+      <FreeCounter apiLimitCount={apiLimitCount} />
     </div>
   )
 }
