@@ -60,7 +60,7 @@ const routes = [
   },
 ]
 interface Props {
-  apiLimitCount: number
+  apiLimitCount?: number
 }
 
 const Sidebar = ({ apiLimitCount = 0 }: Props) => {
